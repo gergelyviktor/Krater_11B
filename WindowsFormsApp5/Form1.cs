@@ -34,7 +34,25 @@ namespace WindowsFormsApp5 {
             sr.Close();
             // 2. sorok száma
             label2.Text = lista.Count.ToString();
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
             // 3. 
+            var keresettAdat = textBox1.Text;
+            var index = -1;
+            foreach (var item in lista) {
+                if (item.nev == keresettAdat) {
+                    index = lista.IndexOf(item);
+                }
+            }
+            if (index == -1) {
+                label3.Text = "Nincs ilyen nevű kráter";
+            }
+            else {
+                //megvan
+                label3.Text = $"A {lista[index].nev} középpontja: {lista[index].x}, {lista[index].y}";
+            }
         }
     }
 }
