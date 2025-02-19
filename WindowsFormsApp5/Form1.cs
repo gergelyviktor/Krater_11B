@@ -42,11 +42,26 @@ namespace WindowsFormsApp5 {
                     label4.Text = $"A legnagyobb kráter neve és sugara: {item.nev}, {item.r}";
                 }
             }
-            // 5. feladat
-            double tav = tavolsag(100.5,50.0,200.0,80.0);
-            MessageBox.Show(tav.ToString());
+            //double tav = tavolsag(100.5,50.0,200.0,80.0);
+            //MessageBox.Show(tav.ToString());
+            // 6. feladat - mely kráterek nem fedik egymást (nincs metszetük)
+            // ha a távolságuk nagyobb, mint a két kör sugara összesen
+            foreach (var item in lista) {
+                comboBox1.Items.Add(item.nev);
+            }
+            // 7. feladat - átlépjük
+
+            // 8. feladat - fájlba írás
+            var sw = new StreamWriter("terulet.txt");
+            foreach (var item in lista) {
+                var terulet = Math.Round(item.r * item.r * Math.PI, 2);
+                sw.WriteLine(terulet + "\t" + item.nev);
+            }
+            sw.Close();
+
         }
 
+        // 5. feladat
         private double tavolsag(double x1, double y1, double x2, double y2) {
             return Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         }
@@ -66,6 +81,15 @@ namespace WindowsFormsApp5 {
             else {
                 //megvan
                 label3.Text = $"A {lista[index].nev} középpontja: {lista[index].x}, {lista[index].y}";
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+            var kivalasztottKrater = comboBox1.SelectedIndex;
+            foreach (var item in lista) {
+                if (tavolsag(item.x, item.y, lista[kivalasztottKrater].x, lista[kivalasztottKrater].y) > (item.r + lista[kivalasztottKrater].r)) {
+                    label6.Text += item.nev + "\n";
+                }
             }
         }
     }
