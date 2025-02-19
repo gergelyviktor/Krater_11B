@@ -34,7 +34,14 @@ namespace WindowsFormsApp5 {
             sr.Close();
             // 2. sorok száma
             label2.Text = lista.Count.ToString();
-            
+            // 4. feladat - maximum keresés
+            var maxSugar = lista[0].r;
+            foreach (var item in lista) {
+                if (item.r > maxSugar) {
+                    maxSugar = item.r;
+                    label4.Text = $"A legnagyobb kráter neve és sugara: {item.nev}, {item.r}";
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e) {
