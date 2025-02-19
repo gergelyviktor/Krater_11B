@@ -42,6 +42,13 @@ namespace WindowsFormsApp5 {
                     label4.Text = $"A legnagyobb kráter neve és sugara: {item.nev}, {item.r}";
                 }
             }
+            // 5. feladat
+            double tav = tavolsag(100.5,50.0,200.0,80.0);
+            MessageBox.Show(tav.ToString());
+        }
+
+        private double tavolsag(double x1, double y1, double x2, double y2) {
+            return Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         }
 
         private void button1_Click(object sender, EventArgs e) {
